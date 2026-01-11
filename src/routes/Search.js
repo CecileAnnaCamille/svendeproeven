@@ -53,7 +53,9 @@ const Search = () => {
             value={searchData}
             className="search--input"
           />
-          <SearchIcon styles="search--icon" />
+          <div class="search--input-icon-wrapper">
+            <SearchIcon styles="search--icon" />
+          </div>
         </div>
         {filteredData.length !== 0 && searchData.length !== 0 && (
           <div className="activities-cards-container search--activities-cards-container">

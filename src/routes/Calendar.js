@@ -15,7 +15,7 @@ const Calendar = () => {
   const useA = useAuth();
   const auth = useA.auth;
 
-  // console.log(auth);
+  console.log(auth);
 
   const userId = auth.userId;
   const role = auth.role;
@@ -25,8 +25,11 @@ const Calendar = () => {
   const USER_URL = `api/v1/users/${userId}`;
   const ACTIVITIES_URL = "api/v1/activities";
 
-  const [userActivitiesData, setUserActivitiesData] = useState("");
-  const [instructorActivitiesData, setInstructorActivitiesData] = useState("");
+  const [userActivitiesData, setUserActivitiesData] = useState([]); // changed
+  const [instructorActivitiesData, setInstructorActivitiesData] = useState([]); // changed
+
+  console.log('userActivitiesData', userActivitiesData);
+  console.log('instructorActivitiesData', instructorActivitiesData);
 
   useEffect(() => {
     fetchUser();
@@ -50,7 +53,8 @@ const Calendar = () => {
 
         let userActivities = response?.data?.activities;
 
-        setUserActivitiesData(userActivities);
+        //setUserActivitiesData(userActivities);
+        setUserActivitiesData(Array.isArray(userActivities) ? userActivities : []);
 
         // console.log(userActivitiesData && userActivitiesData);
       }
@@ -65,7 +69,8 @@ const Calendar = () => {
 
       let activities = response?.data;
 
-      setInstructorActivitiesData(activities);
+      // setInstructorActivitiesData(activities);
+      setInstructorActivitiesData(Array.isArray(activities) ? activities : []);
 
       // console.log(instructorActivitiesData && instructorActivitiesData);
     } catch (err) {
@@ -97,7 +102,9 @@ const Calendar = () => {
       <WrapperCenterContent>
         <Heading2 text="Kalender" />
 
-        {userId && role && userActivitiesData?.length > 0 && (
+        {userId && 
+         role !== "instructor" &&
+         Array.isArray(userActivitiesData) && userActivitiesData.length > 0 && (
           <main className="calender--cards-wrapper">
             {userActivitiesData.map((userActivityData) => (
               <Link
@@ -115,11 +122,10 @@ const Calendar = () => {
         )}
 
         {userId &&
-          role &&
           role === "instructor" &&
-          instructorActivitiesArray?.length > 0 && (
+          Array.isArray(instructorActivitiesData) && instructorActivitiesData.length > 0 && (
             <main className="calender--cards-wrapper">
-              {instructorActivitiesArray.map((instructorActivity) => (
+              {instructorActivitiesData.map((instructorActivity) => (
                 <Link
                   to={`/class-overview/${instructorActivity?.activityId}`}
                   style={{ textDecoration: "none" }}
@@ -155,8 +161,8 @@ const Calendar = () => {
         )}
 
         {login &&
-          !instructorActivitiesArray?.length &&
-          !userActivitiesData?.length && (
+          !Array.isArray(instructorActivitiesData) && instructorActivitiesData.length > 0 ||
+          !Array.isArray(userActivitiesData) && userActivitiesData.length > 0 && (
             <Heading3
               text="Tilmeld dig danseklasser for at se dem i din kalender"
               styles="white-color-important"

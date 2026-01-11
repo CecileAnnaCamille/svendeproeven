@@ -141,8 +141,8 @@ const ActivityDetails = () => {
     if (!signedUp) {
       addUserToActivity = async () => {
         try {
-          if (token === auth.token && id && userId === auth.userId) {
-            await axios.post(USER_AND_ACTIVITY_URL, {
+          if (token && id && userId) {
+            await axios.post(USER_AND_ACTIVITY_URL, null, {
               headers: {
                 Authorization: "Bearer " + token,
               },
@@ -162,6 +162,32 @@ const ActivityDetails = () => {
       console.log(token);
     }
   };
+
+  // const handleAddToActivity = () => {
+  //   if (!signedUp) {
+  //     addUserToActivity = async () => {
+  //       try {
+  //         if (token === auth.token && id && userId === auth.userId) {
+  //           await axios.post(USER_AND_ACTIVITY_URL, {
+  //             headers: {
+  //               Authorization: "Bearer " + token,
+  //             },
+  //           });
+  //         }
+  //         console.log("user added to activity");
+  //         setSignedUp(true);
+  //       } catch (err) {
+  //         console.log(err);
+  //       }
+  //     };
+  //     addUserToActivity();
+
+  //     console.log(signedUp);
+  //     console.log(userId);
+  //     console.log(id);
+  //     console.log(token);
+  //   }
+  // };
 
   return (
     <>

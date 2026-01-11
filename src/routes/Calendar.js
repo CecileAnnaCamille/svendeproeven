@@ -127,7 +127,7 @@ const Calendar = () => {
             <main className="calender--cards-wrapper">
               {instructorActivitiesData.map((instructorActivity) => (
                 <Link
-                  to={`/class-overview/${instructorActivity?.activityId}`}
+                  to={`/class-overview/${instructorActivity?.id}`}
                   style={{ textDecoration: "none" }}
                   key={instructorActivity?.activityId}
                 >

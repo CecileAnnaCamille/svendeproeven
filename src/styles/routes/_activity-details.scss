@@ -10,6 +10,12 @@
   align-items: flex-end;
   gap: 0.6rem;
   padding: 1.5rem;
+
+  a {
+    background-color: $purple;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+  }
 }
 
 .activity-details-content-wrapper {

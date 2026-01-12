@@ -46,23 +46,36 @@ const ClassOverview = () => {
                   <section className="class-overview__details-wrapper">
                     {activityData.time && activityData.weekday && activityData.maxParticipants && (
                     <ul className="class-overview__details">
-                      <li className="class-overview__details-detail">Tid: {activityData.time}</li>
-                      <li className="class-overview__details-detail">Dag: {activityData.weekday}</li>
-                      <li className="class-overview__details-detail">Max deltagere: {activityData.maxParticipants}</li>
+                      <li className="class-overview__details-detail">
+                        <span className="class-overview__details-detail-title">Tid: </span>{activityData.time}</li>
+                      <li className="class-overview__details-detail">
+                        <span className="class-overview__details-detail-title">Dag: </span>{activityData.weekday}</li>
+                      <li className="class-overview__details-detail">
+                        <span className="class-overview__details-detail-title">Max deltagere: </span>{activityData.maxParticipants}</li>
                     </ul>
                     )}
 
+                    <Heading3 text={'Deltagere'} styles="white-color-important"/>
 
-                    {activityData.users.map((user) => (
-                    <div key={user.id} class="class-overview__participants-wrapper">
-                      <Heading3 text={'Deltagere'} styles="white-color-important"/>
+                    {activityData.users.length > 0 && (
+                      <ul className="class-overview__participants-wrapper">
+                      {activityData.users.map((user) => (
+                        <li key={user.id}>
+                          <Paragraf
+                            text={`${user.firstname} ${user.lastname}`}
+                            styles="white-color-important" 
+                          />
+                        </li>
+                      ))}
+                      </ul>
+                    )}
+
+                    {activityData.users.length <= 0 && (
                       <Paragraf
-                        text={`${user.firstname} ${user.lastname}`}
-                        key={user.id}
+                        text={'Der er ingen tilmeldte deltagere.'}
                         styles="white-color-important" 
                       />
-                    </div>
-                    ))}
+                    )}
                   </section>
                 </>
 

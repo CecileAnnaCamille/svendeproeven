@@ -3,11 +3,18 @@
         list-style-type: none;
         padding: 0;
         margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
 
         &-detail {
             font-size: 1rem;
             font-weight: $font-weight-regular;
             color: $white;
+
+            &-title {
+                font-weight: $font-weight-bold;
+            }
         }
 
         &-wrapper {
@@ -15,8 +22,7 @@
             display: flex;
             flex-flow: column nowrap;
             justify-content: flex-start;
-            align-items: left;
-            gap: 1.5rem;
+            gap: 2rem;
         }
     }
 
